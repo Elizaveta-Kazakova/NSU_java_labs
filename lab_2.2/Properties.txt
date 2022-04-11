@@ -1,0 +1,10 @@
+# ru.nsu.fit.stack_calc.commands.Comment
+PUSH ru.nsu.fit.stack_calc.commands.Push
+POP ru.nsu.fit.stack_calc.commands.Pop
++ ru.nsu.fit.stack_calc.commands.Sum
+- ru.nsu.fit.stack_calc.commands.Sub
+/ ru.nsu.fit.stack_calc.commands.Div
+* ru.nsu.fit.stack_calc.commands.Mul1
+SQRT ru.nsu.fit.stack_calc.commands.Sqrt
+PRINT ru.nsu.fit.stack_calc.commands.Print
+DEFINE ru.nsu.fit.stack_calc.commands.Define
