@@ -55,7 +55,7 @@ public class GameView implements Observer, TimeObserver {
 
     private static final String LOSING_HEADER = "You clicked on a mine";
     private static final String LOSING_CONTENT = "So you lost the game :c";
-    private static final String WIN_HEADER = "You clicked on a mine";
+    private static final String WIN_HEADER = "You win !!!!";
     private static final String WIN_CONTENT ="My congratulations !! :)";
 
 
