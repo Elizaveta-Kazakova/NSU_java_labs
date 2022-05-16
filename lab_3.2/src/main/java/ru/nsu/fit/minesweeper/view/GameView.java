@@ -53,6 +53,12 @@ public class GameView implements Observer, TimeObserver {
 
     private static final String MAIN_MENU_VIEW = "/ru/nsu/fit/minesweeper/primary.fxml";
 
+    private static final String LOSING_HEADER = "You clicked on a mine";
+    private static final String LOSING_CONTENT = "So you lost the game :c";
+    private static final String WIN_HEADER = "You clicked on a mine";
+    private static final String WIN_CONTENT ="My congratulations !! :)";
+
+
     private static final double PREF_GAME_FILED_LENGTH = 450;
     private static final double PREF_GAME_FIELD_WIDTH = 450;
 
@@ -120,11 +126,11 @@ public class GameView implements Observer, TimeObserver {
         endGameAlert.getButtonTypes().clear();
         endGameAlert.getButtonTypes().addAll(restartGame, goToMainMenu);
         if (!minesweeperData.isWin()) {
-            endGameAlert.setHeaderText("You clicked on a mine");
-            endGameAlert.setContentText("So you lost the game :c");
+            endGameAlert.setHeaderText(LOSING_HEADER);
+            endGameAlert.setContentText(LOSING_CONTENT);
         } else {
-            endGameAlert.setHeaderText("You win !!!!");
-            endGameAlert.setContentText("My congratulations !! :)");
+            endGameAlert.setHeaderText(WIN_HEADER);
+            endGameAlert.setContentText(WIN_CONTENT);
         }
 
         ButtonType clickedButtonType = endGameAlert.showAndWait().get();
