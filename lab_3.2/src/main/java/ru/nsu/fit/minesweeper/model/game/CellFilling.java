@@ -7,9 +7,6 @@ public enum CellFilling {
     private static CellFilling[] VALUES = values();
 
     public CellFilling increaseFilling() {
-        if (this == BOMB) {
-            // throw exception
-        }
         return VALUES[(this.ordinal() + HOP_FOR_NEXT) % VALUES.length];
     }
 
