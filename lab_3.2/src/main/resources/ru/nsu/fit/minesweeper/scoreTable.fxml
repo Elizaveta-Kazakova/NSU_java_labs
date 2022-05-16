@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.fit.minesweeper.controller.ScoreTableController">
+   <children>
+      <ImageView blendMode="SCREEN" fitHeight="600.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@images/bomb.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="scoreTable" blendMode="MULTIPLY" layoutY="124.0" prefHeight="408.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="userName" prefWidth="300.0" style="-fx-background-color: rgb(255,226,183); -fx-border-color: BROWN;" text="user name" />
+          <TableColumn fx:id="time" prefWidth="296.8" style="-fx-background-color: rgb(255,226,183); -fx-border-color: BROWN;" text="time" />
+        </columns>
+      </TableView>
+      <Button fx:id="backButton" layoutX="459.0" layoutY="547.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="38.0" prefWidth="126.0" style="-fx-background-radius: 1000; -fx-background-color: rgb(254, 225, 92); -fx-font-size: 15; -fx-border-color: #846953; -fx-border-radius: 10000;" text="Back" textAlignment="CENTER" textFill="#846953" AnchorPane.bottomAnchor="14.600000000000001" AnchorPane.rightAnchor="14.599999999999994" />
+      <Label alignment="CENTER" layoutX="52.0" layoutY="36.0" prefHeight="0.0" prefWidth="496.0" style="-fx-background-color: rgb(250, 231, 201); -fx-background-radius: 15; -fx-border-color: #5e5c5c; -fx-border-radius: 15;" text="Score table" textFill="#5e5c5c" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="52.0">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
