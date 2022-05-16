@@ -31,7 +31,7 @@ public class GameController extends GameView {
 
     @FXML
     public void restartGame(MouseEvent event) {
-        myTimer.restartTimer();
+        timer.restartTimer();
         minesweeperData.restartGame();
     }
 

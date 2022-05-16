@@ -19,7 +19,7 @@ import ru.nsu.fit.minesweeper.model.game.CellUserNote;
 import ru.nsu.fit.minesweeper.model.game.MinesweeperData;
 import ru.nsu.fit.minesweeper.model.scoreTable.ScoreTableData;
 import ru.nsu.fit.minesweeper.model.settings.SettingsData;
-import ru.nsu.fit.minesweeper.timer.MyTimer;
+import ru.nsu.fit.minesweeper.timer.Timer;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -91,7 +91,7 @@ public class GameView implements Observer, TimeObserver {
 
     private final ArrayList<ImageView> gameCells = new ArrayList<>();
 
-    protected MyTimer myTimer = new MyTimer();
+    protected Timer timer = new Timer();
 
     protected MinesweeperData minesweeperData;
 
@@ -137,7 +137,7 @@ public class GameView implements Observer, TimeObserver {
 
         if (clickedButtonType == restartGame) {
             endGameAlert.close();
-            myTimer.restartTimer();
+            timer.restartTimer();
             minesweeperData.restartGame();
             startTimerThread();
         }
@@ -153,9 +153,9 @@ public class GameView implements Observer, TimeObserver {
     }
 
     private void endGame() throws IOException {
-        myTimer.setActive(false);
+        timer.setActive(false);
         if (minesweeperData.isWin()) {
-            scoreTableDataList.add(new ScoreTableData(userName, myTimer.getFormattedTime()));
+            scoreTableDataList.add(new ScoreTableData(userName, timer.getFormattedTime()));
         }
         showEndGameAlert();
     }
@@ -170,11 +170,11 @@ public class GameView implements Observer, TimeObserver {
 
     private void addObservers() {
         minesweeperData.addObserver(this);
-        myTimer.addTimeObserver(this);
+        timer.addTimeObserver(this);
     }
 
     private void startTimerThread() {
-        Thread timer = new Thread(myTimer);
+        Thread timer = new Thread(this.timer);
         timer.start();
     }
 
@@ -186,7 +186,7 @@ public class GameView implements Observer, TimeObserver {
     }
 
     private void updateTimeLabel() {
-        timeLabel.setText(myTimer.getFormattedTime());
+        timeLabel.setText(timer.getFormattedTime());
     }
 
     @Override
