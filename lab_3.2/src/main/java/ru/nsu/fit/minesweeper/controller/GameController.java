@@ -17,7 +17,7 @@ public class GameController extends GameView {
     }
 
     private void handleRightClick(MouseEvent event) {
-        // правая кнопка мыши - сменить юзер ноут на следующий в списке
+        // right mouse button - change user laptop to the next one in the list
         int cellIndex = getCellIndex(event);
         minesweeperData.changeUserNote(cellIndex);
     }
