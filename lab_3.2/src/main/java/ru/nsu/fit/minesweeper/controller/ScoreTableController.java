@@ -24,10 +24,9 @@ public class ScoreTableController {
 
     private static final String MAIN_MENU_VIEW = "/ru/nsu/fit/minesweeper/primary.fxml";
     private static final String SCORE_FILE = "src/main/java/ru/nsu/fit/minesweeper/model/scoreTable/scoreData";
-    private static final String SCORE_FILE_DELIMITER = " ";
+    private static final String SCORE_FILE_DELIMITER = ";";
     private static final int FIRST_EL = 0;
     private static final int SECOND_EL = 1;
-    private static final String WHITESPACE_CHARACTERS = "\\s";
     private static final String NEXT_LINE_SYM = "\n";
 
     private final List<ScoreTableData> scoreTableDataList = new ArrayList<>();
@@ -56,7 +55,7 @@ public class ScoreTableController {
         try (BufferedReader scoreFileReader = new BufferedReader(new FileReader(SCORE_FILE))) {
             String newLine;
             while ((newLine = scoreFileReader.readLine()) != null) {
-                String[] scoreEls = newLine.split(WHITESPACE_CHARACTERS);
+                String[] scoreEls = newLine.split(SCORE_FILE_DELIMITER);
                 scoreTableDataList.add(new ScoreTableData(scoreEls[FIRST_EL], scoreEls[SECOND_EL]));
             }
         }
