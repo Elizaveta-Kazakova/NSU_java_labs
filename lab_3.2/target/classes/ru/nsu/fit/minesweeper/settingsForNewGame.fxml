@@ -65,5 +65,10 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <Label fx:id="labelUnderUserName" alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="226.0" prefHeight="20.0" prefWidth="150.0" textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

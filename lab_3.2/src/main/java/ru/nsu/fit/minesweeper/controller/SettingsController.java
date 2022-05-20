@@ -21,6 +21,8 @@ public class SettingsController {
     private static final String WRONG_NUMBER = "Write only positive integer numbers !";
     private static final String POSITIVE_INTEGER_NUMBER = "\\d+";
     private static final String WRONG_SIZE_OF_FIELD = "You chose num of mines > size of field !";
+    private static final String WRONG_USER_NAME = "Don`t use ';' please...";
+    private static final String SCORE_FILE_DELIMITER = ";";
 
     private int parsedLength;
     private int parsedWidth;
@@ -54,6 +56,9 @@ public class SettingsController {
 
     @FXML
     private Label labelUnderWidth;
+
+    @FXML
+    private Label labelUnderUserName;
 
     private void setTextFields(SettingsData settingsData) {
         lengthField.setText(String.valueOf(settingsData.getLength()));
@@ -148,6 +153,12 @@ public class SettingsController {
 
     @FXML
     public void setUserName(ActionEvent event) {
+        if (nameField.getText().contains(SCORE_FILE_DELIMITER)) {
+            nameField.setText(settingsData.getUserName());
+            labelUnderUserName.setText(WRONG_USER_NAME);
+            return;
+        }
+        labelUnderUserName.setText(EMPTY_STR);
         settingsData.setUserName(this.getUserName());
     }
 
