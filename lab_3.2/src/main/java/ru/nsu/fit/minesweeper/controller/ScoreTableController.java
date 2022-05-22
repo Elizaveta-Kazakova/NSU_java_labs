@@ -61,11 +61,11 @@ public class ScoreTableController {
         }
     }
 
-    private String createRecordFromData(ScoreTableData scoreTableData) {
+    private static String createRecordFromData(ScoreTableData scoreTableData) {
         return scoreTableData.getUserName() + SCORE_FILE_DELIMITER + scoreTableData.getTime() + NEXT_LINE_SYM;
     }
 
-    private void addDataInFile(List<ScoreTableData> scoreTableDataList) throws IOException  {
+    public static void addDataInFile(List<ScoreTableData> scoreTableDataList) throws IOException  {
         try (BufferedWriter scoreFileWriter = new BufferedWriter(new FileWriter(SCORE_FILE, true))) {
             for (ScoreTableData curScoreData : scoreTableDataList) {
                 String record = createRecordFromData(curScoreData);
@@ -83,11 +83,9 @@ public class ScoreTableController {
         scoreTable.setItems(tableRowList);
     }
 
-    public void setData(List<ScoreTableData> scoreTableDataList) {
+    public void initialize() {
         try {
-            addDataInFile(scoreTableDataList);
             initTable();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

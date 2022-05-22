@@ -2,9 +2,7 @@ package ru.nsu.fit.minesweeper.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
@@ -16,7 +14,6 @@ import ru.nsu.fit.minesweeper.model.scoreTable.ScoreTableData;
 import ru.nsu.fit.minesweeper.model.settings.SettingsData;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenuController {
@@ -30,7 +27,6 @@ public class MainMenuController {
     private static final String EXIT_LABEL_CONTENT  = ":c";
 
     private SettingsData settingsData = new SettingsData();
-    private List<ScoreTableData> scoreTableDataList = new ArrayList<>();
 
     @FXML
     private AnchorPane pane = new AnchorPane();
@@ -73,9 +69,6 @@ public class MainMenuController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(SCORE_TABLE_VIEW));
         try {
             root = loader.load();
-            ScoreTableController scoreTableController = loader.getController();
-            scoreTableController.setData(scoreTableDataList);
-
             App.setNewScene(root);
         } catch (IOException e) {
             e.printStackTrace();
@@ -84,8 +77,8 @@ public class MainMenuController {
 
     @FXML
     void showSettings(MouseEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(SETTINGS_VIEW));
         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(SETTINGS_VIEW));
             root = loader.load();
             SettingsController settingsController = loader.getController();
             settingsController.setData(settingsData);
@@ -97,8 +90,8 @@ public class MainMenuController {
     }
 
     public void initialize() {
-        startImage.fitWidthProperty().bind(pane.widthProperty());
-        startImage.fitHeightProperty().bind(pane.heightProperty());
+            startImage.fitWidthProperty().bind(pane.widthProperty());
+            startImage.fitHeightProperty().bind(pane.heightProperty());
     }
 
     public void setSettingsData(SettingsData settingsData) {
@@ -106,6 +99,13 @@ public class MainMenuController {
     }
 
     public void setScoreTableData(List<ScoreTableData> scoreTableDataList) {
-        this.scoreTableDataList = scoreTableDataList;
+        try {
+            if (!scoreTableDataList.isEmpty()) {
+                ScoreTableController.addDataInFile(scoreTableDataList);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 }
