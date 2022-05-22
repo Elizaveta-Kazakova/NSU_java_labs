@@ -12,17 +12,26 @@ import javafx.scene.layout.AnchorPane;
 import ru.nsu.fit.minesweeper.App;
 import ru.nsu.fit.minesweeper.model.settings.SettingsData;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class SettingsController {
 
+    private static final int FIRST_EL = 0;
+    private static final int SECOND_EL = 1;
+    private static final int THIRD_EL = 2;
+    private static final int FOURTH_EL = 3;
+    private static final String SETTINGS_DATA_FILE = "src/main/java/ru/nsu/fit/minesweeper/model/settings/settingsData";
     private static final String MAIN_MENU_VIEW = "/ru/nsu/fit/minesweeper/primary.fxml";
     private static final String EMPTY_STR = "";
     private static final String WRONG_NUMBER = "Write only positive integer numbers !";
     private static final String POSITIVE_INTEGER_NUMBER = "\\d+";
     private static final String WRONG_SIZE_OF_FIELD = "You chose num of mines > size of field !";
     private static final String WRONG_USER_NAME = "Don`t use ';' please...";
-    private static final String SCORE_FILE_DELIMITER = ";";
+    private static final String FILE_DELIMITER = ";";
 
     private int parsedLength;
     private int parsedWidth;
@@ -73,10 +82,26 @@ public class SettingsController {
         parsedNumOfMines = settingsData.getNumOfMines();
     }
 
-    public void setData(SettingsData settingsData) {
-        this.settingsData = settingsData;
-        setTextFields(settingsData);
-        setParsedData(settingsData);
+    private static String createSettingsRecord(SettingsData settingsData) {
+        return settingsData.getUserName() + FILE_DELIMITER + settingsData.getLength() + FILE_DELIMITER +
+                settingsData.getWidth() + FILE_DELIMITER + settingsData.getNumOfMines();
+    }
+
+    private void downloadSettingFile() throws IOException {
+        try (BufferedReader settingsFileReader = new BufferedReader(new FileReader(SETTINGS_DATA_FILE))) {
+            String newLine;
+            while ((newLine = settingsFileReader.readLine()) != null) {
+                String[] scoreEls = newLine.split(FILE_DELIMITER);
+                settingsData.setData(scoreEls[FIRST_EL], Integer.parseInt(scoreEls[SECOND_EL]),
+                        Integer.parseInt(scoreEls[THIRD_EL]), Integer.parseInt(scoreEls[FOURTH_EL]));
+            }
+        }
+    }
+
+    public static void addSettingsInFile(SettingsData settingsData) throws IOException {
+        try (BufferedWriter settingsFileWriter = new BufferedWriter(new FileWriter(SETTINGS_DATA_FILE))) {
+            settingsFileWriter.write(createSettingsRecord(settingsData));
+        }
     }
 
 
@@ -99,12 +124,22 @@ public class SettingsController {
     public void initialize() {
         settingImage.fitWidthProperty().bind(SettingPane.widthProperty());
         settingImage.fitHeightProperty().bind(SettingPane.heightProperty());
+        try {
+            downloadSettingFile();
+            setTextFields(settingsData);
+            setParsedData(settingsData);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void goBack(MouseEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(MAIN_MENU_VIEW));
         try {
+            SettingsController.addSettingsInFile(settingsData);
+
             Parent root = loader.load();
             MainMenuController mainMenuController = loader.getController();
             mainMenuController.setSettingsData(settingsData);
@@ -153,7 +188,7 @@ public class SettingsController {
 
     @FXML
     public void setUserName(ActionEvent event) {
-        if (nameField.getText().contains(SCORE_FILE_DELIMITER)) {
+        if (nameField.getText().contains(FILE_DELIMITER)) {
             nameField.setText(settingsData.getUserName());
             labelUnderUserName.setText(WRONG_USER_NAME);
             return;

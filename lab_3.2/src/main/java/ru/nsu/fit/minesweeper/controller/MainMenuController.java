@@ -80,9 +80,6 @@ public class MainMenuController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(SETTINGS_VIEW));
             root = loader.load();
-            SettingsController settingsController = loader.getController();
-            settingsController.setData(settingsData);
-
             App.setNewScene(root);
         } catch (IOException e) {
             e.printStackTrace();
@@ -96,6 +93,7 @@ public class MainMenuController {
 
     public void setSettingsData(SettingsData settingsData) {
         this.settingsData = settingsData;
+
     }
 
     public void setScoreTableData(List<ScoreTableData> scoreTableDataList) {

@@ -49,4 +49,11 @@ public class SettingsData {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    public void setData(String userName, int length, int width, int numOfMines) {
+        setUserName(userName);
+        setLength(length);
+        setWidth(width);
+        setNumOfMines(numOfMines);
+    }
 }
