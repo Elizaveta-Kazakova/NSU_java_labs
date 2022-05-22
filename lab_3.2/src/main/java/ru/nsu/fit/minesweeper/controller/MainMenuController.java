@@ -38,6 +38,7 @@ public class MainMenuController {
     void createNewGame(MouseEvent event) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(NEW_GAME_VIEW));
         try {
+            settingsData = SettingsController.downloadSettingFile();
             root = loader.load();
             GameController gameController = loader.getController();
             gameController.setData(settingsData);
@@ -89,11 +90,6 @@ public class MainMenuController {
     public void initialize() {
             startImage.fitWidthProperty().bind(pane.widthProperty());
             startImage.fitHeightProperty().bind(pane.heightProperty());
-    }
-
-    public void setSettingsData(SettingsData settingsData) {
-        this.settingsData = settingsData;
-
     }
 
     public void setScoreTableData(List<ScoreTableData> scoreTableDataList) {

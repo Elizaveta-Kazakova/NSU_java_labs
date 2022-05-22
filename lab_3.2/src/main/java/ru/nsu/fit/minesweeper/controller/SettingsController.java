@@ -87,7 +87,8 @@ public class SettingsController {
                 settingsData.getWidth() + FILE_DELIMITER + settingsData.getNumOfMines();
     }
 
-    private void downloadSettingFile() throws IOException {
+    public static SettingsData downloadSettingFile() throws IOException {
+        SettingsData settingsData = new SettingsData();
         try (BufferedReader settingsFileReader = new BufferedReader(new FileReader(SETTINGS_DATA_FILE))) {
             String newLine;
             while ((newLine = settingsFileReader.readLine()) != null) {
@@ -96,6 +97,7 @@ public class SettingsController {
                         Integer.parseInt(scoreEls[THIRD_EL]), Integer.parseInt(scoreEls[FOURTH_EL]));
             }
         }
+        return settingsData;
     }
 
     public static void addSettingsInFile(SettingsData settingsData) throws IOException {
@@ -125,7 +127,7 @@ public class SettingsController {
         settingImage.fitWidthProperty().bind(SettingPane.widthProperty());
         settingImage.fitHeightProperty().bind(SettingPane.heightProperty());
         try {
-            downloadSettingFile();
+            settingsData = downloadSettingFile();
             setTextFields(settingsData);
             setParsedData(settingsData);
 
@@ -141,9 +143,6 @@ public class SettingsController {
             SettingsController.addSettingsInFile(settingsData);
 
             Parent root = loader.load();
-            MainMenuController mainMenuController = loader.getController();
-            mainMenuController.setSettingsData(settingsData);
-
             App.setNewScene(root);
         } catch (IOException e) {
             e.printStackTrace();
