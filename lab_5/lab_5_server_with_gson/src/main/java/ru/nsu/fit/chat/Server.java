@@ -60,7 +60,8 @@ public class Server implements TCPListener {
         sendToAll(command);
     }
 
-    private void sendToAll(Command command) {
+    private synchronized void sendToAll(Command command) {
+        logger.info("send to all message " + command.getClass());
         for (TCPHandler connection : connections) {
             connection.sendMessage(command);
         }

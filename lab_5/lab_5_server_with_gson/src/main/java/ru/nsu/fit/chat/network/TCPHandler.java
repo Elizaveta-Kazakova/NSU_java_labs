@@ -54,7 +54,6 @@ public class TCPHandler implements Runnable {
             writer.flush();
         } catch (IOException e) {
             disconnect();
-            listener.onDisconnect(this);
         }
     }
 
