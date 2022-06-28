@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="gsonLib">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/Documents/NSU/4_semestr/oop/gson/examples/android-proguard-example/src" />
+      <root url="file://$USER_HOME$/Documents/NSU/4_semestr/oop/gson/extras/src/main/java" />
+      <root url="file://$USER_HOME$/Documents/NSU/4_semestr/oop/gson/extras/src/test/java" />
+      <root url="file://$USER_HOME$/Documents/NSU/4_semestr/oop/gson/gson/src/main/java" />
+      <root url="file://$USER_HOME$/Documents/NSU/4_semestr/oop/gson/gson/src/main/java-templates" />
+      <root url="file://$USER_HOME$/Documents/NSU/4_semestr/oop/gson/gson/src/test/java" />
+      <root url="file://$USER_HOME$/Documents/NSU/4_semestr/oop/gson/metrics/src/main/java" />
+      <root url="file://$USER_HOME$/Documents/NSU/4_semestr/oop/gson/proto/src/main/java" />
+      <root url="file://$USER_HOME$/Documents/NSU/4_semestr/oop/gson/proto/src/test/java" />
+    </SOURCES>
+  </library>
+</component>
